@@ -22,8 +22,23 @@ class _CustomDropDownScreenState extends State<CustomDropDownScreen> {
     actionKey = LabeledGlobalKey(widget.text);
   }
 
+  OverlayEntry _createFloatingDropDown() {
+    return OverlayEntry(builder: ((context) {
+      return Positioned(
+        left: xPosition,
+        width: width,
+        top: yPosition + height,
+        height: 4 * height + 40,
+        child: Container(
+          height: 200,
+          decoration: const BoxDecoration(color: Colors.greenAccent),
+        ),
+      );
+    }));
+  }
+
   void findDropDownData() {
-    RenderBox renderBox = actionKey.currentContext!.findRenderObject();
+    RenderBox renderBox = actionKey.currentContext.findRenderObject();
     height = renderBox.size.height;
     width = renderBox.size.width;
     Offset offset = renderBox.localToGlobal(Offset.zero);
@@ -42,6 +57,8 @@ class _CustomDropDownScreenState extends State<CustomDropDownScreen> {
         key: actionKey,
         onTap: () {
           findDropDownData();
+          OverlayEntry floatingDropDown = _createFloatingDropDown();
+          Overlay.of(context)?.insert(floatingDropDown);
           setState(() {
             isDropDownOpened = !isDropDownOpened;
           });
