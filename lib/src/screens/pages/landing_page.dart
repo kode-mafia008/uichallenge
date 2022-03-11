@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uichallenge/src/screens/about_page.dart';
-import 'package:uichallenge/src/screens/help_page.dart';
-import 'package:uichallenge/src/screens/home_page.dart';
-import 'package:uichallenge/src/screens/main_page.dart';
+import 'about_page.dart';
+import 'help_page.dart';
+import 'home_page.dart';
+import 'main_page.dart';
 
 class LandingPage extends StatefulWidget {
   final String page;
@@ -67,13 +67,13 @@ class _LandingPageState extends State<LandingPage> {
               child: Center(
                   child: IndexedStack(
                 index: pages.indexOf(widget.page),
-                children: [
-                  const HomePageCustomHook(),
-                  const AboutPage(
+                children: const [
+                  HomePageCustomHook(),
+                  AboutPage(
                     name: 'Scott',
                   ),
-                  const HelpPage(),
-                  const MainPage(),
+                  HelpPage(),
+                  MainPage(),
                 ],
               )),
             ),
